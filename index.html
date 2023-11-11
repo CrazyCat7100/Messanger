@@ -3,9 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Messanger</title>
+    <title>Messenger</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div class="contact-list"></div>
+    <div class="container">
+        <div class="sidebar">
+            <div class="contact-list" id="contact-list">
+                <h1>Select an available contact</h1>
+                <!-- Contacts will be dynamically added here -->
+            </div>
+        </div>
+        <div class="main">
+            <div class="messages" id="messages">
+                <!-- Display previous messages here -->
+            </div>
+            <div class="input-message">
+                <input type="text" id="message-input" placeholder="Type your message...">
+                <button id="send-message-button">Send</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 </html>

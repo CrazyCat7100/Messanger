@@ -1,0 +1,47 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    display: flex;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.sidebar {
+    flex: 1;
+    padding-right: 20px;
+}
+
+.contact-list {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+.main {
+    flex: 3;
+}
+
+.messages, .input-message {
+    background-color: #fff;
+    border: 1px solid #ddd;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+#message-input {
+    width: 70%;
+    padding: 8px;
+    margin-right: 10px;
+}
+
+#send-message-button {
+    padding: 8px;
+    cursor: pointer;
+}
