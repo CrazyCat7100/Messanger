@@ -11,6 +11,7 @@ body {
 }
 
 .auth-form {
+    display: none; /* Initially hide both login and register forms */
     margin-bottom: 20px;
     padding: 10px;
     border: 1px solid #ccc;

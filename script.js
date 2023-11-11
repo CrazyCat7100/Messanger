@@ -8,31 +8,23 @@ document.addEventListener("DOMContentLoaded", function () {
     // Connect to the server using Socket.IO
     const socket = io();
 
-    // Listen for a chat message from the server
-    socket.on('chatMessage', (data) => {
-        // Display the message
-        const messageDiv = document.createElement("div");
-        messageDiv.textContent = data;
-        messagesDiv.appendChild(messageDiv);
-        // Scroll to the bottom of the messages container
-        messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    // Event listener for login button
+    document.getElementById("login-button").addEventListener("click", function () {
+        registrationForm.style.display = "none"; // Hide registration form
+        loginForm.style.display = "block"; // Show login form
     });
 
-    // Event listener for send message button
-    sendMessageButton.addEventListener("click", () => {
-        const message = messageInput.value;
-        // Emit the chat message to the server
-        socket.emit('chatMessage', message);
-        // Clear the input field
-        messageInput.value = "";
+    // Event listener for register button
+    document.getElementById("register-button").addEventListener("click", function () {
+        loginForm.style.display = "none"; // Hide login form
+        registrationForm.style.display = "block"; // Show registration form
     });
 
     // Event listener for registration form submission
-    registrationForm.addEventListener("submit", (event) => {
+    registrationForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        const formData = new FormData(registrationForm);
-        const username = formData.get("username");
-        const password = formData.get("password");
+        const username = document.getElementById("registration-username").value;
+        const password = document.getElementById("registration-password").value;
 
         // Send registration data to the server
         fetch("/register", {
@@ -48,11 +40,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     // Event listener for login form submission
-    loginForm.addEventListener("submit", (event) => {
+    loginForm.addEventListener("submit", function (event) {
         event.preventDefault();
-        const formData = new FormData(loginForm);
-        const username = formData.get("username");
-        const password = formData.get("password");
+        const username = document.getElementById("login-username").value;
+        const password = document.getElementById("login-password").value;
 
         // Send login data to the server
         fetch("/login", {
@@ -65,5 +56,24 @@ document.addEventListener("DOMContentLoaded", function () {
         .then(response => response.text())
         .then(data => console.log(data))
         .catch(error => console.error("Error:", error));
+    });
+
+    // Event listener for send message button
+    sendMessageButton.addEventListener("click", () => {
+        const message = messageInput.value;
+        // Emit the chat message to the server
+        socket.emit('chatMessage', message);
+        // Clear the input field
+        messageInput.value = "";
+    });
+
+    // Listen for a chat message from the server
+    socket.on('chatMessage', (data) => {
+        // Display the message
+        const messageDiv = document.createElement("div");
+        messageDiv.textContent = data;
+        messagesDiv.appendChild(messageDiv);
+        // Scroll to the bottom of the messages container
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
     });
 });
