@@ -21,6 +21,9 @@ io.on('connection', (socket) => {
 
         // Send the updated list of contacts to all clients
         io.emit('updateContacts', Object.keys(connectedDevices));
+
+        // Send the user's IP address back to the client
+        socket.emit('yourIpAddress', ipAddress);
     });
 
     // Listen for a message from the client containing a chat message

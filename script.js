@@ -36,6 +36,22 @@ document.addEventListener("DOMContentLoaded", function () {
         });
     });
 
+    // Listen for the user's IP address from the server
+    socket.on('yourIpAddress', (ipAddress) => {
+        // Display the user's IP address as a new contact
+        const contactDiv = document.createElement("div");
+        contactDiv.classList.add("contact");
+        contactDiv.textContent = ipAddress;
+
+        // Handle contact click event
+        contactDiv.addEventListener("click", function () {
+            loadMessages(ipAddress);
+        });
+
+        // Add the new contact to the contact list
+        contactList.appendChild(contactDiv);
+    });
+
     // Function to load messages for a specific contact
     function loadMessages(contact) {
         // Emit the selected contact to the server
