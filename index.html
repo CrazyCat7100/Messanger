@@ -8,20 +8,34 @@
 </head>
 <body>
     <div class="container">
-        <div class="sidebar">
-            <div class="contact-list" id="contact-list">
-                <h1>Select an available contact</h1>
-                <!-- Contacts will be dynamically added here -->
-            </div>
+        <div class="auth-form" id="registration-form">
+            <h2>Register</h2>
+            <form action="/register" method="post">
+                <label for="reg-username">Username:</label>
+                <input type="text" id="reg-username" name="username" required>
+                <label for="reg-password">Password:</label>
+                <input type="password" id="reg-password" name="password" required>
+                <button type="submit">Register</button>
+            </form>
         </div>
-        <div class="main">
-            <div class="messages" id="messages">
-                <!-- Display previous messages here -->
-            </div>
-            <div class="input-message">
-                <input type="text" id="message-input" placeholder="Type your message...">
-                <button id="send-message-button">Send</button>
-            </div>
+
+        <div class="auth-form" id="login-form">
+            <h2>Login</h2>
+            <form action="/login" method="post">
+                <label for="login-username">Username:</label>
+                <input type="text" id="login-username" name="username" required>
+                <label for="login-password">Password:</label>
+                <input type="password" id="login-password" name="password" required>
+                <button type="submit">Login</button>
+            </form>
+        </div>
+
+        <div class="messages" id="messages">
+            <!-- Display previous messages here -->
+        </div>
+        <div class="input-message">
+            <input type="text" id="message-input" placeholder="Type your message...">
+            <button id="send-message-button">Send</button>
         </div>
     </div>
 

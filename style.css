@@ -1,47 +1,67 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
     margin: 0;
     padding: 0;
+    font-family: Arial, sans-serif;
 }
 
 .container {
-    display: flex;
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 600px;
+    margin: auto;
     padding: 20px;
 }
 
-.sidebar {
-    flex: 1;
-    padding-right: 20px;
-}
-
-.contact-list {
-    background-color: #fff;
-    border: 1px solid #ddd;
-    padding: 10px;
+.auth-form {
     margin-bottom: 20px;
-}
-
-.main {
-    flex: 3;
-}
-
-.messages, .input-message {
-    background-color: #fff;
-    border: 1px solid #ddd;
     padding: 10px;
-    margin-bottom: 20px;
+    border: 1px solid #ccc;
+}
+
+.auth-form h2 {
+    margin-bottom: 10px;
+}
+
+.auth-form label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.auth-form input {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+}
+
+.auth-form button {
+    padding: 8px;
+    background-color: #4CAF50;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+.auth-form button:hover {
+    background-color: #45a049;
+}
+
+.messages {
+    height: 300px;
+    overflow-y: scroll;
+    border: 1px solid #ccc;
+    padding: 10px;
+}
+
+.input-message {
+    display: flex;
+    margin-top: 10px;
 }
 
 #message-input {
-    width: 70%;
-    padding: 8px;
-    margin-right: 10px;
+    flex: 1;
+    padding: 5px;
 }
 
 #send-message-button {
-    padding: 8px;
+    padding: 5px;
+    margin-left: 5px;
     cursor: pointer;
 }

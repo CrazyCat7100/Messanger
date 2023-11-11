@@ -1,62 +1,12 @@
 document.addEventListener("DOMContentLoaded", function () {
-    const contactList = document.getElementById("contact-list");
     const messagesDiv = document.getElementById("messages");
     const messageInput = document.getElementById("message-input");
     const sendMessageButton = document.getElementById("send-message-button");
+    const registrationForm = document.getElementById("registration-form");
+    const loginForm = document.getElementById("login-form");
 
     // Connect to the server using Socket.IO
     const socket = io();
-
-    // Emit the device's IP address to the server
-    socket.emit('ipAddress', getIpAddress());
-
-    // Function to get the device's IP address
-    function getIpAddress() {
-        // This is a basic example; you might need to find a more reliable way to get the IP address
-        return '192.168.1.2';
-    }
-
-    // Listen for an updated list of contacts from the server
-    socket.on('updateContacts', (contacts) => {
-        // Clear existing content
-        contactList.innerHTML = "<h1>Select an available contact</h1>";
-
-        // Display each contact
-        contacts.forEach(contact => {
-            const contactDiv = document.createElement("div");
-            contactDiv.classList.add("contact");
-            contactDiv.textContent = contact;
-
-            // Handle contact click event
-            contactDiv.addEventListener("click", function () {
-                loadMessages(contact);
-            });
-
-            contactList.appendChild(contactDiv);
-        });
-    });
-
-    // Listen for the user's IP address from the server
-    socket.on('yourIpAddress', (ipAddress) => {
-        // Display the user's IP address as a new contact
-        const contactDiv = document.createElement("div");
-        contactDiv.classList.add("contact");
-        contactDiv.textContent = ipAddress;
-
-        // Handle contact click event
-        contactDiv.addEventListener("click", function () {
-            loadMessages(ipAddress);
-        });
-
-        // Add the new contact to the contact list
-        contactList.appendChild(contactDiv);
-    });
-
-    // Function to load messages for a specific contact
-    function loadMessages(contact) {
-        // Emit the selected contact to the server
-        socket.emit('selectedContact', contact);
-    }
 
     // Listen for a chat message from the server
     socket.on('chatMessage', (data) => {
@@ -64,36 +14,56 @@ document.addEventListener("DOMContentLoaded", function () {
         const messageDiv = document.createElement("div");
         messageDiv.textContent = data;
         messagesDiv.appendChild(messageDiv);
+        // Scroll to the bottom of the messages container
+        messagesDiv.scrollTop = messagesDiv.scrollHeight;
     });
 
     // Event listener for send message button
     sendMessageButton.addEventListener("click", () => {
-        const selectedContact = document.querySelector(".contact.selected");
-        if (!selectedContact) {
-            alert("Please select a contact first.");
-            return;
-        }
-
-        const contactName = selectedContact.textContent;
         const message = messageInput.value;
-
         // Emit the chat message to the server
         socket.emit('chatMessage', message);
-
         // Clear the input field
         messageInput.value = "";
     });
 
-    // Event listener for selecting a contact
-    contactList.addEventListener("click", (event) => {
-        const selectedContact = document.querySelector(".contact.selected");
-        if (selectedContact) {
-            selectedContact.classList.remove("selected");
-        }
+    // Event listener for registration form submission
+    registrationForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(registrationForm);
+        const username = formData.get("username");
+        const password = formData.get("password");
 
-        // Add the 'selected' class to the clicked contact
-        if (event.target.classList.contains("contact")) {
-            event.target.classList.add("selected");
-        }
+        // Send registration data to the server
+        fetch("/register", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error("Error:", error));
+    });
+
+    // Event listener for login form submission
+    loginForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(loginForm);
+        const username = formData.get("username");
+        const password = formData.get("password");
+
+        // Send login data to the server
+        fetch("/login", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ username, password }),
+        })
+        .then(response => response.text())
+        .then(data => console.log(data))
+        .catch(error => console.error("Error:", error));
     });
 });
