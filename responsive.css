@@ -6,9 +6,11 @@
 
     .send {
         width: 90%;
+        height: 50px;
     }
 
     .message {
         margin-left: 35px;
+        min-height: 50px;
     }
 }
