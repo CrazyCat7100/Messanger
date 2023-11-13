@@ -5,27 +5,28 @@ body {
 .chat {
     position: absolute;
     border: 5px solid black;
-    width: 50%;
+    width: 100%;
     height: 100vh;
     display: flex;
     top: 0;
     left: 0;
     background: rgb(239, 239, 239);
     /* bottom: 10px; */
+    justify-content: center;
 
 }
 
 .send {
-    width: 100%;
+    width: 98%;
     height: 20%;
-    margin-bottom: 10px;
+    margin-bottom: 7px;
     display: flex;
     border: 5px solid black;
     position: absolute;
-    bottom: 20px;
+    bottom: 0px;
     justify-content: center;
     align-items: center;
-
+    border-radius: 10px;
 }
 
 .input {
@@ -45,15 +46,36 @@ body {
 
 .send_btn  {
     padding: 10px 15px;
-
     margin-left: 20px;
 
 }
 
 .send_btn:hover {
     background: grey;
+    border-radius: 5px;
+    cursor: pointer;
 }
 
 img {
     width: 40px;
 }
+
+
+
+.message {
+    border: 5px solid #000;
+    border-radius: 10px;
+    display: flex;
+    width: 300px;
+    height: 80px;
+    align-items: center;
+    gap: 20px;
+    margin-top: 20px;
+}
+
+.icon {
+    background: grey;
+    border-radius: 100%;
+    margin-left: 10px;
+}
+
