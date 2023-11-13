@@ -4,15 +4,14 @@ body {
 
 .chat {
     position: absolute;
-    border: 5px solid black;
     width: 100%;
     height: 100vh;
     display: flex;
     top: 0;
     left: 0;
-    background: rgb(239, 239, 239);
     /* bottom: 10px; */
-    justify-content: center;
+    flex-direction: column;
+
 
 }
 
@@ -27,6 +26,9 @@ body {
     justify-content: center;
     align-items: center;
     border-radius: 10px;
+    background-color: grey;
+    position: fixed;
+    margin-left: 10px;
 }
 
 .input {
@@ -40,9 +42,9 @@ body {
 
 }
 
-* {
+/* * {
     box-sizing: border-box;
-}
+} */
 
 .send_btn  {
     padding: 10px 15px;
@@ -67,10 +69,11 @@ img {
     border-radius: 10px;
     display: flex;
     width: 300px;
-    height: 80px;
+    min-height: 80px;
     align-items: center;
     gap: 20px;
     margin-top: 20px;
+    margin-left: 50px;
 }
 
 .icon {
