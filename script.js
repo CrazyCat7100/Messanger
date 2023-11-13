@@ -8,6 +8,7 @@ function findInputText() {
         if (inputText.trim() !== '') {
             input.value = '';
             cloneMessages(inputText);
+            scrollToBottom();
         }
     });
 
@@ -17,6 +18,7 @@ function findInputText() {
             if (inputText.trim() !== '') {
                 input.value = '';
                 cloneMessages(inputText);
+                scrollToBottom();
             }
         }
     });
@@ -30,6 +32,10 @@ function cloneMessages(text) {
         <div class="message_text">${text}</div>
     `;
     chat.appendChild(messageDiv);
+}
+
+function scrollToBottom() {
+    chat.scrollTop = chat.scrollHeight;
 }
 
 findInputText();
