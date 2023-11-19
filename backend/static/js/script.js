@@ -5,6 +5,13 @@ let chat = document.getElementsByClassName('chat')[0];
 function findInputText() {
     sendBtn.addEventListener('click', function () {
         let inputText = input.value;
+        let name = 'Incognito'
+        let icon = 'icon.svg'
+        fetch('/save/' + icon + '/' + name+ '/' + inputText)
+        .then(data => (data.json()))
+        .then(json=> {
+            console.log(json) // status: ok
+        })
         if (inputText.trim() !== '') {
             input.value = '';
             cloneMessages(inputText);

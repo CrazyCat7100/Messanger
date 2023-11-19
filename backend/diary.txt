@@ -4,3 +4,6 @@ clear - ctrl l
 npm init - create new project (backend: save data, reg, auth, )
 
 npm i express ejs mongoose cors
+
+
+html == ejs *
