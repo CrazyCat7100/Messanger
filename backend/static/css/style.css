@@ -69,3 +69,26 @@ img {
     border-radius: 100%;
     margin-left: 10px;
 }
+
+
+.catalog-icons {
+    background: white;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    border-radius: 7px;
+    position: absolute;
+    height: 200px;
+    top: -192px;
+    overflow-y: scroll;
+    left: 0;
+    width: 220px;
+    padding: 10px;
+    align-items: start;
+    transition: .2s;
+    opacity: 0;
+}
+
+.select-icon:hover .catalog-icons, .catalog-icons:hover {
+    opacity: 1;
+}

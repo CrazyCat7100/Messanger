@@ -22,6 +22,13 @@ function findInputText() {
     input.addEventListener('keydown', function (event) {
         if (event.key === 'Enter') {
             let inputText = input.value;
+            let name = 'Incognito'
+            let icon = 'icon.svg'
+            fetch('/save/' + icon + '/' + name+ '/' + inputText)
+            .then(data => (data.json()))
+            .then(json=> {
+                console.log(json) // status: ok
+            })
             if (inputText.trim() !== '') {
                 input.value = '';
                 cloneMessages(inputText);
@@ -46,3 +53,14 @@ function scrollToBottom() {
 }
 
 findInputText();
+
+
+
+
+let icons = document.getElementsByClassName('avatar')
+
+for (let i = 0; i < icons.length; i++) {
+    icons[i].addEventListener('click', function () {
+        alert(icons[i].src)
+    })
+}

@@ -26,10 +26,15 @@ let app = express()
 app.set('view engine', 'ejs')
 
 app.use(express.static('static'))
-app.get('/', function (req, res) {
+app.get('/', async function (req, res) {
     // res.send('ok')
-    res.render('index.ejs')
+    let data = await dbMessanger.find({})
+    res.render('index.ejs', {data: data})
 })
+
+
+
+
 app.get('/save/:icon/:name/:text', async function (req, res) {
     let icon = req.params.icon;
     let name = req.params.name;
