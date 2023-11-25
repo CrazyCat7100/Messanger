@@ -6,7 +6,7 @@ function findInputText() {
     sendBtn.addEventListener('click', function () {
         let inputText = input.value;
         let name = 'Incognito'
-        let icon = 'icon.svg'
+        let icon = '/img/question_mark.png'
         fetch('/save/' + icon + '/' + name+ '/' + inputText)
         .then(data => (data.json()))
         .then(json=> {
