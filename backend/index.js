@@ -35,6 +35,45 @@ app.get('/', async function (req, res) {
 
 
 
+
+
+app.get('/updateMessages/:lastId', async function (req, res) {
+    let lastIdUser = req.params.lastId;
+    let allMessages = await dbMessanger.find({})
+    // let currentMessage = await dbMessanger.find({_id: lastIdUser})
+    // [5, 4, 6]
+
+
+
+    let lastIdDB = allMessages[allMessages.length-1]._id
+    if (lastIdUser != lastIdDB) {
+        console.log('found new message')
+        let currentId = lastIdDB
+        // last: 4    new: 10
+        // delat poka 10 9 8 7 6 5 4 poka id ne sovpadut
+        let index = 1;
+        let listMsg = []
+        try {
+        while (currentId != lastIdUser) {
+            currentId = allMessages[allMessages.length-index]._id
+            listMsg.push(allMessages[allMessages.length-index])
+            index++
+        }
+        listMsg = listMsg.slice(0, listMsg.length-1)
+        return res.send({status: true, data: listMsg})
+    } catch (e) {
+        return res.send({status: false, data: 'error'})
+
+    }
+    } else {
+        console.log('not found new message')
+        return res.send({status: false, data: 'not found new message'})
+    }
+    res.send('ok')
+
+} )
+
+
 app.get('/save/:icon/:name/:text', async function (req, res) {
     let icon = req.params.icon;
     let name = req.params.name;

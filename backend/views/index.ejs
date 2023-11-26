@@ -15,8 +15,8 @@
         
         <div class="chat">
             <%  for (let i = 0; i < data.length; i++) {  %>
-                <div class="message">
-                <img src="icon.svg" alt="" class="icon">
+                <div class="message" data-id="<%= data[i]._id  %> ">
+                    <img src="icon.svg" alt="" class="icon">
                 <div class="message_text"> <%= data[i].message  %>  </div>
             </div>
           <% }  %>
