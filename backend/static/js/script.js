@@ -1,58 +1,79 @@
 let sendBtn = document.getElementsByClassName('send_btn')[0];
 let input = document.getElementsByClassName('input')[0];
 let chat = document.getElementsByClassName('chat')[0];
+let messagesContainer = document.getElementsByClassName('messages2')[0];
 
 
 
 
 
-setInterval(function () {
+
+    setInterval(function () {
     let messages = document.getElementsByClassName('message')
     let lastId = messages[messages.length - 1].dataset.id;
     fetch('/updateMessages/' + lastId)
     .then(data => (data.json()))
     .then(json=> {
         console.log(json) // status: ok
+        if (json.status) {
+            for (let i = 0; i < json.data.length; i++) {
+                let newMessage = `
+                <div class="message" data-id="${json.data[i]._id} ">
+                    <img src="icon.svg" alt="" class="icon">
+                    <div class="message_text"> ${json.data[i].message} </div>
+                </div>
+            `
+            messagesContainer.innerHTML += newMessage
+            }
+            
+        }
     })
 }, 500 )
 
-
+function sendMsg (event) {
+    if (!event || event.key === 'Enter') {
+    let inputText = input.value;
+    let name = 'Incognito'
+    let icon = 'icon.svg'
+    fetch('/save/' + icon + '/' + name+ '/' + inputText)
+    .then(data => (data.json()))
+    .then(json=> {
+        console.log(json) // status: ok
+    })
+    if (inputText.trim() !== '') {
+        input.value = '';
+        // cloneMessages(inputText);
+        scrollToBottom();
+    }
+}
+}
 
 function findInputText() {
-    sendBtn.addEventListener('click', function () {
-        let inputText = input.value;
-        let name = 'Incognito'
-        let icon = 'icon.svg'
-        fetch('/save/' + icon + '/' + name+ '/' + inputText)
-        .then(data => (data.json()))
-        .then(json=> {
-            console.log(json) // status: ok
-        })
-        if (inputText.trim() !== '') {
-            input.value = '';
-            cloneMessages(inputText);
-            scrollToBottom();
-        }
-    });
+    sendBtn.addEventListener('click', () => { sendMsg(false)  });
 
-    input.addEventListener('keydown', function (event) {
-        if (event.key === 'Enter') {
-            let inputText = input.value;
-            let name = 'Incognito'
-            let icon = 'icon.svg'
-            fetch('/save/' + icon + '/' + name+ '/' + inputText)
-            .then(data => (data.json()))
-            .then(json=> {
-                console.log(json) // status: ok
-            })
-            if (inputText.trim() !== '') {
-                input.value = '';
-                cloneMessages(inputText);
-                scrollToBottom();
-            }
-        }
-    });
+    input.addEventListener('keydown', () => { sendMsg(event)  });
 }
+
+
+
+// function (event) {
+//     if (event.key === 'Enter') {
+//         let inputText = input.value;
+//         let name = 'Incognito'
+//         let icon = 'icon.svg'
+//         fetch('/save/' + icon + '/' + name+ '/' + inputText)
+//         .then(data => (data.json()))
+//         .then(json=> {
+//             console.log(json) // status: ok
+//         })
+//         if (inputText.trim() !== '') {
+//             input.value = '';
+//             cloneMessages(inputText);
+//             scrollToBottom();
+//         }
+//     }
+// }
+
 
 function cloneMessages(text) {
     let messageDiv = document.createElement('div');
@@ -61,11 +82,11 @@ function cloneMessages(text) {
         <img src="question_mark.png" alt="" class="icon">
         <div class="message_text">${text}</div>
     `;
-    chat.appendChild(messageDiv);
+    messagesContainer.appendChild(messageDiv);
 }
 
 function scrollToBottom() {
-    chat.scrollTop = chat.scrollHeight;
+    chat.scrollTop = 999999999999;
 }
 
 findInputText();
@@ -80,3 +101,5 @@ for (let i = 0; i < icons.length; i++) {
         alert(icons[i].src)
     })
 }
+
+scrollToBottom()

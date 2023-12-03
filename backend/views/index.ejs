@@ -14,27 +14,31 @@
 
         
         <div class="chat">
-            <%  for (let i = 0; i < data.length; i++) {  %>
+            <div class="messages2">
+                <%  for (let i = 0; i < data.length; i++) {  %>
                 <div class="message" data-id="<%= data[i]._id  %> ">
                     <img src="icon.svg" alt="" class="icon">
-                <div class="message_text"> <%= data[i].message  %>  </div>
-            </div>
-          <% }  %>
-
-
-            <div class="send">
-                <div class="select-icon">
-                    <div class="catalog-icons">
-                        <img src="/img/avatars/avatar_1.jpg" alt="" class="avatar avatar1">
-                        <img src="/img/avatars/avatar_2.jpg" alt="" class="avatar avatar2">
-                        
-                    </div>
-                    <img src="/img/avatars/question_mark.png" alt="" class="icon-img">
+                    <div class="message_text"> <%= data[i].message  %></div>
                 </div>
-                    <input type="text" class="input">
-                <div class="send_btn"><img src="/img/send_btn.png" alt=""></div>
+            <% }  %>
             </div>
+
+
+         
         </div>
+    </div>
+
+    <div class="send">
+        <div class="select-icon">
+            <div class="catalog-icons">
+                <img src="/img/avatars/avatar_1.jpg" alt="" class="avatar avatar1">
+                <img src="/img/avatars/avatar_2.jpg" alt="" class="avatar avatar2">
+                
+            </div>
+            <img src="/img/avatars/question_mark.png" alt="" class="icon-img">
+        </div>
+            <input type="text" class="input">
+        <div class="send_btn"><img src="/img/send_btn.png" alt=""></div>
     </div>
 
    
