@@ -25,6 +25,7 @@ let messagesContainer = document.getElementsByClassName('messages2')[0];
             `
             messagesContainer.innerHTML += newMessage
             }
+            scrollToBottom()
             
         }
     })
@@ -34,7 +35,7 @@ function sendMsg (event) {
     if (!event || event.key === 'Enter') {
     let inputText = input.value;
     let name = 'Incognito'
-    let icon = 'icon.svg'
+    let icon = '/img/question_mark.png'
     fetch('/save/' + icon + '/' + name+ '/' + inputText)
     .then(data => (data.json()))
     .then(json=> {
@@ -91,14 +92,20 @@ function scrollToBottom() {
 
 findInputText();
 
-
+fetch('/date/year')
+.then(data=>(data.json()))
+.then(json=>{
+    console.log(json)
+})
 
 
 let icons = document.getElementsByClassName('avatar')
+let icon = document.getElementsByClassName('icon-img')[0]
 
 for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function () {
-        alert(icons[i].src)
+        // alert(icons[i].src)
+        icon.src = icons[i].src
     })
 }
 

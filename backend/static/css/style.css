@@ -86,9 +86,17 @@ img {
     padding: 10px;
     align-items: start;
     transition: .2s;
-    opacity: 0;
+    display: none;
 }
 
-.select-icon:hover .catalog-icons, .catalog-icons:hover {
-    opacity: 1;
+
+
+.time {
+    position: absolute;
+    top: 50px;
+    right: 50px;
+}
+
+.select-icon:hover .catalog-icons {
+    display: flex;
 }

@@ -28,8 +28,10 @@ app.set('view engine', 'ejs')
 app.use(express.static('static'))
 app.get('/', async function (req, res) {
     // res.send('ok')
+    let date = new Date()
+    let nowdate = date.getDate()
     let data = await dbMessanger.find({})
-    res.render('index.ejs', {data: data})
+    res.render('index.ejs', {data: data, nowdate})
 })
 
 
@@ -74,6 +76,22 @@ app.get('/updateMessages/:lastId', async function (req, res) {
 } )
 
 
+app.get('/date/:type', async function (req, res) {
+    let type = req.params.type;
+    let date = new Date()
+    if (type == 'month') {
+        res.send({status: date.getMonth() })
+    }
+    if (type == 'day') {
+        res.send({status: date.Day() })
+    }
+    if (type == 'year') {
+        res.send({status: date.getFullYear() })
+    }
+    
+    
+})
+
 app.get('/save/:icon/:name/:text', async function (req, res) {
     let icon = req.params.icon;
     let name = req.params.name;
@@ -92,6 +110,8 @@ app.get('/save/:icon/:name/:text', async function (req, res) {
 
 app.listen(3005)
 // http://localhost:3005
+
+
 
 
 
