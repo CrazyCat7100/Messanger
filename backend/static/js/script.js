@@ -2,10 +2,11 @@ let sendBtn = document.getElementsByClassName('send_btn')[0];
 let input = document.getElementsByClassName('input')[0];
 let chat = document.getElementsByClassName('chat')[0];
 let messagesContainer = document.getElementsByClassName('messages2')[0];
+let icons = document.getElementsByClassName('avatar')
+let icon = document.getElementsByClassName('icon-img')[0]
 
 
-
-
+input.focus()
 
 
     setInterval(function () {
@@ -19,7 +20,7 @@ let messagesContainer = document.getElementsByClassName('messages2')[0];
             for (let i = 0; i < json.data.length; i++) {
                 let newMessage = `
                 <div class="message" data-id="${json.data[i]._id} ">
-                    <img src="icon.svg" alt="" class="icon">
+                    <img src="/img/avatars/${json.data[i].icon}" alt="" class="icon">
                     <div class="message_text"> ${json.data[i].message} </div>
                 </div>
             `
@@ -35,8 +36,9 @@ function sendMsg (event) {
     if (!event || event.key === 'Enter') {
     let inputText = input.value;
     let name = 'Incognito'
-    let icon = '/img/question_mark.png'
-    fetch('/save/' + icon + '/' + name+ '/' + inputText)
+    let userIcon = icon.src.slice(  icon.src.lastIndexOf('/')+1 )
+
+    fetch('/save/' + userIcon + '/' + name+ '/' + inputText)
     .then(data => (data.json()))
     .then(json=> {
         console.log(json) // status: ok
@@ -99,8 +101,6 @@ fetch('/date/year')
 })
 
 
-let icons = document.getElementsByClassName('avatar')
-let icon = document.getElementsByClassName('icon-img')[0]
 
 for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function () {

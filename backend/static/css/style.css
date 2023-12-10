@@ -100,3 +100,8 @@ img {
 .select-icon:hover .catalog-icons {
     display: flex;
 }
+
+
+.message:nth-child(1) {
+    display: none;
+}

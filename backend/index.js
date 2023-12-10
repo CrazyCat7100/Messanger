@@ -19,8 +19,12 @@ let dbMessanger = mongoose.model('messanger', mySchema)
 
 
 
-
-
+await dbMessanger.deleteMany({})
+await dbMessanger.insertMany([{
+    icon: '',
+    name: '',
+    message: '',
+}])
 
 let app = express()
 app.set('view engine', 'ejs')
@@ -44,6 +48,8 @@ app.get('/updateMessages/:lastId', async function (req, res) {
     let allMessages = await dbMessanger.find({})
     // let currentMessage = await dbMessanger.find({_id: lastIdUser})
     // [5, 4, 6]
+
+try {
 
 
 
@@ -71,6 +77,7 @@ app.get('/updateMessages/:lastId', async function (req, res) {
         console.log('not found new message')
         return res.send({status: false, data: 'not found new message'})
     }
+} catch (e) {}
     res.send('ok')
 
 } )
