@@ -121,6 +121,7 @@ img {
     
   }
   .pretty-input {
+    background-color: red;
     position: relative;
     z-index: -1;
   }
