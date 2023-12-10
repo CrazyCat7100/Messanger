@@ -121,9 +121,8 @@ img {
     
   }
   .pretty-input {
-    background-color: red;
     position: relative;
-    z-index: -1;
+    z-index: 0;
   }
   .choose-file {
     width: 150px;
