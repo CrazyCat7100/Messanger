@@ -113,8 +113,8 @@ img {
 
 .fake-input {
     background: pink;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     position: absolute;
     top: 0;
     left: 0;
@@ -125,8 +125,8 @@ img {
     z-index: 0;
   }
   .choose-file {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     z-index: 1;
     position: relative;
     opacity: 0;
