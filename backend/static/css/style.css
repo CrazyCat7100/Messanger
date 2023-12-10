@@ -129,5 +129,5 @@ img {
     height: 50px;
     z-index: 1;
     position: relative;
-  
+    opacity: 0;
   }
