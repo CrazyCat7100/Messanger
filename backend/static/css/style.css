@@ -112,7 +112,9 @@ img {
 }
 
 .fake-input {
-    background: pink;
+    background-image: url(../img/upload.png);
+    /* background: red; */
+    background-size: cover;
     width: 40px;
     height: 40px;
     position: absolute;
