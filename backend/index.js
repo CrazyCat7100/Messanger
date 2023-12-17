@@ -3,7 +3,21 @@ import express from 'express' // web app shop, soc,
 import cors from 'cors'
 import mongoose, {Schema} from 'mongoose'
 import exp from 'constants'
+import multer from 'multer'
+import path from 'path'
 
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+      cb(null, './static/img/uploads/') // Путь к директории, где будут сохраняться файлы
+    },
+    filename: function (req, file, cb) {
+      cb(null, 'ava-' + new Date().getMilliseconds() + '.png') // Создание имени файла
+    }
+  });
+
+let upload = multer({
+  storage: storage
+})
 
 
 let url = 'mongodb+srv://CrazyCat:123321@messager.mzwa64a.mongodb.net/?retryWrites=true&w=majority'
@@ -55,7 +69,7 @@ try {
 
     let lastIdDB = allMessages[allMessages.length-1]._id
     if (lastIdUser != lastIdDB) {
-        console.log('found new message')
+        // console.log('found new message')
         let currentId = lastIdDB
         // last: 4    new: 10
         // delat poka 10 9 8 7 6 5 4 poka id ne sovpadut
@@ -74,7 +88,7 @@ try {
 
     }
     } else {
-        console.log('not found new message')
+        // console.log('not found new message')
         return res.send({status: false, data: 'not found new message'})
     }
 } catch (e) {}
@@ -113,10 +127,15 @@ app.get('/save/:icon/:name/:text', async function (req, res) {
 })
 
 
+app.post('/img/avatars/', upload.single('myfile') , async function (req, res) {
+    // console.log(req.file)
+    res.send({'status:': '200'}) 
+})
 
 
 app.listen(3005)
 // http://localhost:3005
+
 
 
 

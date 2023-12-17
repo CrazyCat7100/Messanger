@@ -4,6 +4,8 @@ let chat = document.getElementsByClassName('chat')[0];
 let messagesContainer = document.getElementsByClassName('messages2')[0];
 let icons = document.getElementsByClassName('avatar')
 let icon = document.getElementsByClassName('icon-img')[0]
+let chooseFile = document.getElementsByClassName('choose-file')[0]
+let form = document.getElementsByTagName('form')[0]
 
 
 input.focus()
@@ -109,4 +111,20 @@ for (let i = 0; i < icons.length; i++) {
     })
 }
 
+
+
 scrollToBottom()
+
+chooseFile.addEventListener('change', function () {
+    form.submit()
+    // fetch('/img/avatars/', {
+    //     method: 'POST',
+    //     body: {
+
+    //     },
+    //     headers: {
+    //         enctype: 'multipart/form-data'
+    //     }
+    // })
+})
+

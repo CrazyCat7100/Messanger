@@ -39,10 +39,11 @@
                 <img src="/img/avatars/avatar_3.jpg" alt="" class="avatar avatar3">
                 <img src="/img/avatars/avatar_4.jpg" alt="" class="avatar avatar4">
                 <img src="/img/avatars/avatar_5.jpg" alt="" class="avatar avatar5">
-                <form enctype="multipart/form-data">
-  
+                <form method="post" action="/img/avatars" enctype="multipart/form-data">
+  <!-- small code -> 10 * 5 = 50 // 200 * 20 // 4000 -->
+
                     <div class="pretty-input">
-                       <input type="file" class="choose-file">
+                       <input name="myfile" type="file" class="choose-file">
                        <div class="fake-input"></div>
                     </div>
                   </form>
