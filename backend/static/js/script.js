@@ -8,6 +8,13 @@ let chooseFile = document.getElementsByClassName('choose-file')[0]
 let form = document.getElementsByTagName('form')[0]
 
 
+if (localStorage.getItem('ava') == null) {
+    localStorage.setItem('ava', 'question_mark.png')
+}
+
+
+icon.src = '/img/avatars/' + localStorage.getItem('ava')
+
 input.focus()
 
 
@@ -106,8 +113,11 @@ fetch('/date/year')
 
 for (let i = 0; i < icons.length; i++) {
     icons[i].addEventListener('click', function () {
-        // alert(icons[i].src)
+        // alert(icons[i].src)\
+        
         icon.src = icons[i].src
+        let nameImg = icons[i].src.lastIndexOf('/')
+        localStorage.setItem('ava', icons[i].src.slice(nameImg + 1))
     })
 }
 
@@ -116,15 +126,17 @@ for (let i = 0; i < icons.length; i++) {
 scrollToBottom()
 
 chooseFile.addEventListener('change', function () {
-    form.submit()
-    // fetch('/img/avatars/', {
-    //     method: 'POST',
-    //     body: {
+    // form.submit()
+    fetch('/img/avatars/', {
+        method: 'POST',
+        body: new FormData(form)
+        // headers: {
+        //     enctype: 'multipart/form-data'
+        // }
+    }).then (data => (data.json())) .then (json => {
+        icon.src = '/img/avatars/' + json.image
+        localStorage.setItem('ava', json.image)
+    })
 
-    //     },
-    //     headers: {
-    //         enctype: 'multipart/form-data'
-    //     }
-    // })
 })
 

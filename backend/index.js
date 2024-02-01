@@ -5,13 +5,15 @@ import mongoose, {Schema} from 'mongoose'
 import exp from 'constants'
 import multer from 'multer'
 import path from 'path'
+let iconSrc = ''
 
 const storage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './static/img/uploads/') // Путь к директории, где будут сохраняться файлы
+      cb(null, './static/img/avatars/') // Путь к директории, где будут сохраняться файлы
     },
     filename: function (req, file, cb) {
-      cb(null, 'ava-' + new Date().getMilliseconds() + '.png') // Создание имени файла
+        iconSrc = 'ava-' + new Date().getMilliseconds() + '.png'
+        cb(null, iconSrc) // Создание имени файла
     }
   });
 
@@ -129,12 +131,13 @@ app.get('/save/:icon/:name/:text', async function (req, res) {
 
 app.post('/img/avatars/', upload.single('myfile') , async function (req, res) {
     // console.log(req.file)
-    res.send({'status:': '200'}) 
+    res.send({image: iconSrc})
+    // res.redirect('/') 
 })
 
 
-app.listen(3005)
-// http://localhost:3005
+app.listen(3006)
+// http://localhost:3006
 
 
 
