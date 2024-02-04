@@ -38,6 +38,17 @@ let mySchema = new Schema({
 })
 
 let dbMessanger = mongoose.model('messanger', mySchema)
+
+let mySchemaUser = new Schema({
+    login: String,
+    password: String,
+})
+
+let dbUser = mongoose.model('user', mySchemaUser)
+
+
+
+
 // wait
 
 
@@ -65,10 +76,16 @@ app.set('view engine', 'ejs')
 app.use(express.static('static'))
 app.get('/', async function (req, res) {
     // res.send('ok')
-    let date = new Date()
-    let nowdate = date.getDate()
-    let data = await dbMessanger.find({})
-    res.render('index.ejs', {data: data, nowdate})
+    if (req.session.username) {
+
+        let date = new Date()
+        let nowdate = date.getDate()
+        let data = await dbMessanger.find({})
+        res.render('index.ejs', {data: data, nowdate})
+    } else {
+        res.redirect('/login')
+    }
+    
 })
 
 
@@ -161,7 +178,20 @@ app.get('/login', async function (req, res) {
 })
 
 app.post('/login', async function (req, res) {
-
+    let login = req.body.login;
+    let password = req.body.password;
+    let res1 = await dbUser.findOne({
+        login,
+        password
+    })
+    if (res1 == null) {
+        res.redirect('login')
+        // return {result: 'No user found'}
+    }
+    else {
+        req.session.username = login;
+        res.redirect('/')
+    }
 })
 
 app.get('/cabinet', async function (req, res) {
@@ -180,7 +210,12 @@ app.post('/reg', async function (req, res) {
     console.log('login', login)
     console.log('password', password)
     req.session.username = login;
-    res.send('success')
+    await dbUser.insertMany([{
+        login,
+        password,
+    }])
+    // res.send('success')
+    res.redirect('/')
     } catch (e) {
         res.send('error ', e)
     }
