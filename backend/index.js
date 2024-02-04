@@ -5,6 +5,13 @@ import mongoose, {Schema} from 'mongoose'
 import exp from 'constants'
 import multer from 'multer'
 import path from 'path'
+import session from 'express-session'
+import bodyParser from 'body-parser'
+
+
+
+
+
 let iconSrc = ''
 
 const storage = multer.diskStorage({
@@ -43,6 +50,16 @@ await dbMessanger.insertMany([{
 }])
 
 let app = express()
+
+// app.use(bodyParser.json())
+app.use(express.urlencoded({extended: true}))
+app.use(session({
+    secret: 'las$%kdjfKJHJK7867$%GHKJH:>jaf345',
+    saveUninitialized: false,
+    cookie: {secure: false}
+}))
+
+
 app.set('view engine', 'ejs')
 
 app.use(express.static('static'))
@@ -139,8 +156,47 @@ app.post('/img/avatars/', upload.single('myfile') , async function (req, res) {
 app.listen(3006)
 // http://localhost:3006
 
+app.get('/login', async function (req, res) {
+    return res.render('login.ejs')
+})
+
+app.post('/login', async function (req, res) {
+
+})
+
+app.get('/cabinet', async function (req, res) {
+    if (req.session.username) {
+        res.send('ok')
+    } else {
+        res.send('error')
+    }
+})
 
 
+app.post('/reg', async function (req, res) {
+    try {
+    let login = req.body.login;
+    let password = req.body.password;
+    console.log('login', login)
+    console.log('password', password)
+    req.session.username = login;
+    res.send('success')
+    } catch (e) {
+        res.send('error ', e)
+    }
+})
+
+app.get('/logout', async function (req, res) {
+    req.session.destroy((err)=>{
+        if (err) {
+            console.log('errror')
+        }
+        else {
+            
+        }
+    })
+    return res.send('logouted')
+})
 
 
 
