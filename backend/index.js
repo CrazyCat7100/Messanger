@@ -209,12 +209,6 @@ app.post('/reg', async function (req, res) {
     let password = req.body.password;
     console.log('login', login)
     console.log('password', password)
-    let foundUser =  await dbUser.find({
-        $where: {login : login}
-    })
-    if (foundUser.length > 0) {
-        res.redirect('/login')
-    }
     req.session.username = login;
     await dbUser.insertMany([{
         login,
