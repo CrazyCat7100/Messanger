@@ -6,7 +6,24 @@ let icons = document.getElementsByClassName('avatar')
 let icon = document.getElementsByClassName('icon-img')[0]
 let chooseFile = document.getElementsByClassName('choose-file')[0]
 let form = document.getElementsByTagName('form')[0]
+let options = document.getElementsByClassName('options')[0]
+let optionsDiv = document.getElementsByClassName('options-bar')[0]
+let back = document.getElementsByClassName('back')[0]
+let logout = document.getElementsByClassName('logout')[0]
 
+logout.addEventListener('click', function () {
+    window.location.href = '/logout'
+})
+
+back.addEventListener('click', function () {
+    optionsDiv.style.display = 'none'
+    options.style.display = 'flex'
+})
+
+options.addEventListener('click', function () {
+    optionsDiv.style.display = 'flex'
+    options.style.display = 'none'
+}) 
 
 if (localStorage.getItem('ava') == null) {
     localStorage.setItem('ava', 'question_mark.png')

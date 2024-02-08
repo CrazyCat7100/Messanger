@@ -45,15 +45,27 @@ h1 {
     background-color: #45a049;
 }
 
-.reg-form {
-    margin-bottom: 20px;
-}
 
 .login-form, .reg-form {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     flex-direction: column;
     max-width: 500px;
     width: 100%;
+}
+
+.active-form {
+    display: flex;
+}
+
+.option {
+    user-select: none;
+    cursor: pointer;
+    margin-top: 25px;
+    font-size: 25px;
+}
+
+.option:hover {
+    text-decoration: underline;
 }
