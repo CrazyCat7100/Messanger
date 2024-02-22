@@ -16,13 +16,16 @@
             <div class="messages2">
                 <%  for (let i = 0; i < data.length; i++) {  %>
                     <div class="message" data-id="<%= data[i]._id  %> ">
-                        <img src="/img/avatars/<%= data[i].icon  %>" alt="" class="icon">
-                        <% if (data[i].message.startsWith('*')) {%>
+                        <div class='message-top'>
+                            <img src="/img/avatars/<%= data[i].icon  %>" alt="" class="icon">
+                            <h2 class="name"><%= name %></h2>
+                        </div>
+                        <% if (data[i].message.startsWith('*')) { %>
                             <div class="message_text"><b><%= data[i].message.slice(1)  %></b> </div>
                             <% }  else {%>
                                 <div class="message_text"> <%= data[i].message  %></div>
                                 <% }  %>
-                    </div>
+                        </div>
                 <% }  %>
             </div>
 

@@ -11,6 +11,20 @@ let optionsDiv = document.getElementsByClassName('options-bar')[0]
 let back = document.getElementsByClassName('back')[0]
 let logout = document.getElementsByClassName('logout')[0]
 
+
+let userName = 'guest'
+
+fetch('/name')
+.then(data => (data.json()))
+.then(json=> {
+    userName = json.username
+    
+        
+    }
+)
+
+
+
 logout.addEventListener('click', function () {
     window.location.href = '/logout'
 })
@@ -45,12 +59,21 @@ input.focus()
         if (json.status) {
             for (let i = 0; i < json.data.length; i++) {
                 let newMessage = `
-                <div class="message" data-id="${json.data[i]._id} ">
-                    <img src="/img/avatars/${json.data[i].icon}" alt="" class="icon">
+                <div class="message anim" data-id="${json.data[i]._id} ">
+                    <div class="message-top">
+                        <img src="/img/avatars/${json.data[i].icon}" alt="" class="icon">
+                        <h2 class="name">${userName}</h2>
+                    </div>
                     <div class="message_text"> ${json.data[i].message} </div>
                 </div>
             `
             messagesContainer.innerHTML += newMessage
+            setTimeout(() => {
+                let allAnim = document.getElementsByClassName('anim')
+                for (let i = 0; i < allAnim.length; i++ ){
+                    allAnim[i].classList.remove('anim')
+                }
+            }, 1000);
             }
             scrollToBottom()
             
@@ -108,8 +131,11 @@ function cloneMessages(text) {
     let messageDiv = document.createElement('div');
     messageDiv.classList.add('message');
     messageDiv.innerHTML = `
+    <div class='message-top'>   
         <img src="question_mark.png" alt="" class="icon">
-        <div class="message_text">${text}</div>
+        <h2 class="name"></h2>
+    </div>
+    <div class="message_text">${text}</div>
     `;
     messagesContainer.appendChild(messageDiv);
 }

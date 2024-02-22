@@ -9,8 +9,8 @@
 <body>
     <h1 class="welcome">Welcome To Alex Messenger! Please log in or sign up if you don't yet have an account!</h1>
     <form class="reg-form" action="reg" method="post">
-        <input name="login" type="text" class="login" placeholder="Username, NOT EMAIL">
-        <input name="password" type="text" class="password" placeholder="Password, MAKE UP A NEW ONE">
+        <input name="login" required type="text" maxlength="10" class="login" placeholder="Username, NOT EMAIL">
+        <input name="password" type="text" class="password" placeholder="Password">
         <button class="btn">Register</button>
     </form>
 

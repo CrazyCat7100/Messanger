@@ -58,20 +58,33 @@ img {
     display: flex;
     width: fit-content;
     min-width: 300px;
-    height: 80px;
+    height: 120px;
     align-items: center;
     gap: 20px;
     margin-top: 20px;
     margin-left: 50px;
 }
 
+.message-top {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+}
+
+.message {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  align-items: flex-start;
+  padding: 10px 20px;
+}
 
 
 
 .icon {
     background: grey;
     border-radius: 100%;
-    margin-left: 10px;
 }
 
 
@@ -209,4 +222,17 @@ img {
     font-size: 30px;
     user-select: none;
     cursor: pointer;
+  }
+.anim {
+  animation: 1s show;
+
+}
+
+  @keyframes show {
+    0% {
+      background: rgb(124, 255, 124);
+    }
+    100% {
+      background: transparent;
+    }
   }

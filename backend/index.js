@@ -7,6 +7,7 @@ import multer from 'multer'
 import path from 'path'
 import session from 'express-session'
 import bodyParser from 'body-parser'
+import { name } from 'ejs'
 
 
 
@@ -81,11 +82,15 @@ app.get('/', async function (req, res) {
         let date = new Date()
         let nowdate = date.getDate()
         let data = await dbMessanger.find({})
-        res.render('index.ejs', {data: data, nowdate})
+        res.render('index.ejs', {data: data, nowdate, name: req.session.username})
     } else {
         res.redirect('/login')
     }
     
+})
+
+app.get('/name', async function (req, res) {
+    return res.send({username: req.session.username});
 })
 
 
@@ -230,8 +235,8 @@ app.get('/logout', async function (req, res) {
             
         }
     })
-    res.redirect('/logout')
-    return res.send('logouted')
+    return res.redirect('/login')
+    // return res.send('logouted')
 })
 
 
